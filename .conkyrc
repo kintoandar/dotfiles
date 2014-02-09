@@ -1,0 +1,120 @@
+##########################
+# kintoandar.blogspot.com
+##########################
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_type desktop
+#own_window_type override
+own_window_hints below
+background yes
+
+own_window yes
+own_window_type override
+own_window_argb_visual yes
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# fiddle with window
+use_spacer left
+use_xft yes
+
+# Update interval in seconds
+update_interval 3.0
+
+# Minimum size of text area
+minimum_size 140 1
+maximum_width 140
+
+# Draw shades?
+draw_shades no
+
+# Text stuff
+draw_outline no # amplifies text if yes
+draw_borders no
+
+uppercase no # set to yes if you want all text to be in uppercase
+
+# Stippled borders?
+#stippled_borders 8
+
+# border margins
+#border_margin 4
+
+# border width
+#border_width 1
+
+# Default colors and also border colors, grey90 == #e5e5e5
+default_color white
+default_shade_color black
+default_outline_color white
+
+own_window_colour brown
+own_window_transparent yes
+
+# Text alignment, other possible values are commented
+#alignment top_left
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+gap_x 10
+gap_y 30
+
+# stuff after 'TEXT' will be formatted on screen
+
+override_utf8_locale no
+xftfont Terminus:size=8
+xftalpha 0.8
+
+TEXT
+
+#${offset 0}${color slate grey}${time %a, } ${color }${time %e %B %G}
+#${offset 0}${color slate grey}${time %Z,    }${color }${time %H:%M:%S}
+${offset 0}${color slate grey}Uptime: ${color }$uptime
+#${offset 0}${color slate grey}Kern:${color }$kernel
+${offset 0}${color slate grey}CPU:${color } $cpu% ${acpitemp}C
+${color orange} ${offset 0}${cpugraph 20,130 000000 ffffff}
+
+${offset 0}${color slate grey}Load: ${color }$loadavg
+${offset 0}${color slate grey}Processes: ${color }$processes  
+${offset 0}${color slate grey}Running:   ${color }$running_processes
+
+${offset 0}${color slate grey}Highest CPU Hog:
+${offset 0}${color orange} ${top name 1}${top_mem cpu 1}
+${offset 0}${color lightgrey} ${top name 2}${top cpu 2}
+${offset 0}${color lightgrey} ${top name 3}${top cpu 3}
+${offset 0}${color lightgrey} ${top name 4}${top cpu 4}
+
+${offset 0}${color slate grey}Highest Mem Hog:
+${offset 0}${color orange} ${top_mem name 1}${top_mem mem 1}
+${offset 0}${color lightgrey} ${top_mem name 2}${top_mem mem 2}
+${offset 0}${color lightgrey} ${top_mem name 3}${top_mem mem 3}
+${offset 0}${color lightgrey} ${top_mem name 4}${top_mem mem 4}
+
+${offset 0}${color slate grey}Mem:  ${color } $memperc% $mem/$memmax
+${color orange} ${offset 0}${membar 3,100}
+${offset 0}${color slate grey}Swap: ${color } $swapperc% $swap/$swapmax
+${color orange} ${offset 0}${swapbar 3,100}
+
+${offset 0}${color slate grey}/home:  ${color }${fs_free /home}/${fs_size /home}
+${offset 0} ${color orange} ${fs_bar 3,100 /home}
+${offset 0}${color slate grey}/opt:  ${color }${fs_free /opt}/${fs_size /opt}
+${offset 0} ${color orange} ${fs_bar 3,100 /opt}
+
+${offset 0}${color slate grey}eth0 Up: ${color }${upspeed eth0}
+${color orange} ${offset 0}${upspeedgraph eth0 20,130 000000 ffffff}
+${offset 0}${color slate grey}eth0 Down: ${color }${downspeed eth0}
+${color orange} ${offset 0}${downspeedgraph eth0 20,130 000000 ffffff}
+
+${color slate grey}dmsg:
+${color}${exec dmesg |tail -n 3|awk -F":" {'print $1'}|awk {'print $2'}}
+#${color slate grey}auth.log:
+#${color}${exec tail -n5 /var/log/auth.log | cut -d : -f 5,6}
+#${color slate grey}messages:
+#${color}${exec tail -n5 /var/log/messages|cut -d : -f 3,8}
+

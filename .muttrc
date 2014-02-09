@@ -1,0 +1,27 @@
+##########################
+# kintoandar.blogspot.com
+##########################
+
+set editor="vim"
+
+set from = "joel.bastos@example.com"
+set realname = "Joel Bastos"
+
+#set imap_user = "jbastos@mail.example.com"
+#set imap_pass = ""
+
+set folder="imaps://jbastos@mail.example.com/"
+set spoolfile="imaps://jbastos@mail.example.com/INBOX"
+
+#set imap_pass="mypassword"
+
+set mbox="!"
+
+set smtp_url = "smtp://proxy.example.inet:25/"
+
+set header_cache =~/.mutt/cache/headers
+set message_cachedir =~/.mutt/cache/bodies
+set certificate_file =~/.mutt/certificates
+
+bind index G imap-fetch-mail
+bind pager G imap-fetch-mail

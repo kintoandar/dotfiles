@@ -1,0 +1,24 @@
+[user]
+	name = Joel Bastos
+	email = joel.bastos@example.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[color]
+	ui = true
+	status = auto
+	branch = auto
+	interactive = auto
+[merge]
+	tool = vimdiff
+[alias]
+  b = branch
+  st = status -sb
+  ci = commit
+  co = checkout
+  up = checkout
+  d  = diff
+  dp = diff --patience
+  dc = diff --cached
+  dcp = diff --cached --patience
+  gl = log --graph --decorate --pretty=oneline --abbrev-commit --all
