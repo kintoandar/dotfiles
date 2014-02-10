@@ -88,7 +88,7 @@ if ! shopt -q login_shell ; then # We're not a login shell
 fi
 
 ##########################
-# kintoandar.blogspot.com
+# blog.kintoandar.com
 ##########################
 
 eval `dircolors ~/install/dircolors-solarized/dircolors.256dark`
