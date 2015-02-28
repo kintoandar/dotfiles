@@ -1,100 +1,104 @@
-# System wide functions and aliases
-# Environment stuff goes in /etc/profile
+PATH=~/.chef/scripts:~/bin:$PATH
 
-# It's NOT a good idea to change this file unless you know what you
-# are doing. It's much better to create a custom.sh shell script in
-# /etc/profile.d/ to make custom changes to your environment, as this
-# will prevent the need for merging in future updates.
+#PS1='\[\033[01;35m\]osx\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
+#PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
 
-# are we an interactive shell?
-if [ "$PS1" ]; then
-  if [ -z "$PROMPT_COMMAND" ]; then
-    case $TERM in
-    xterm*|vte*)
-      if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
-          PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
-      elif [ "${VTE_VERSION:-0}" -ge 3405 ]; then
-          PROMPT_COMMAND="__vte_prompt_command"
-      else
-          PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-      fi
-      ;;
-    screen*)
-      if [ -e /etc/sysconfig/bash-prompt-screen ]; then
-          PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
-      else
-          PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-      fi
-      ;;
-    *)
-      [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
-      ;;
-    esac
-  fi
-  # Turn on parallel history
-  shopt -s histappend
-  history -a
-  # Turn on checkwinsize
-  shopt -s checkwinsize
-  [ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\u@\h \W]\\$ "
-  # You might want to have e.g. tty in prompt (e.g. more virtual machines)
-  # and console windows
-  # If you want to do so, just add e.g.
-  # if [ "$PS1" ]; then
-  #   PS1="[\u@\h:\l \W]\\$ "
-  # fi
-  # to your custom modification shell script in /etc/profile.d/ directory
+#PS1='\[\e[32m\]\w$(__git_ps1) \$\[\e[0m\] '
+PROMPT_COMMAND='__git_ps1 "\[\e[32m\]\w\[\e[0m\]" " \[\e[32m\]\\\$\[\e[0m\] ";echo -ne "\033]0;${PWD/#$HOME/~}\007"'
+
+# ruby
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# chef
+eval "$(chef shell-init bash)"
+
+export LC_ALL="en_US.UTF-8"
+export LANG="C"
+
+export EDITOR='/usr/bin/vim'
+export HISTTIMEFORMAT='%F %T '
+export HISTCONTROL=ignoredups erasedups
+export HISTSIZE=11000
+
+# serial
+export MINICOM="-m -c on"
+
+# alias definitions
+alias ll='ls -lhaG'
+alias vi='vim'
+#alias proxy="export http_proxy=http://192.168.130.250:8080"
+#alias noproxy="export http_proxy=\"\""
+#alias ssh-add-all="ssh-add ~/.ssh/id_rsa ~/.ssh/old_2012-02-17/id_rsa ~/.ssh/old_2011-03-25/id_rsa ~/.ssh/old_2013-01-04/id_rsa ~/.ssh/personal/id_rsa_personal" # ssh-agent
+alias ws="python -m SimpleHTTPServer"
+alias sshuttle="~/Documents/myprojects/cloned/sshuttle/sshuttle -r coreos-vagrant 10.1.0.0/16 -D --python /home/core/bin/python"
+alias portecle="java -jar ~/install/portecle-1.7/portecle.jar &"
+alias history_clean='history | cut -d" " -f 6-'
+alias listservices='systemctl list-unit-files --type=service ; echo -e "\n\n\nsystemctl [disable|enable] blabla.service"'
+alias sshconf='vi ~/mount/sync/scripts/dotfiles/.ssh/config'
+alias json='python -m json.tool'
+alias rubyverify='tail -n +2 $1 | ruby -c'
+alias diffcookbook='diff -wr $(ls|sort|head -n1) $(ls|sort|tail -n1)'
+alias ns='sudo lsof -n -i4 | grep LISTEN'
+alias grep='grep --color=auto'
+alias diff='colordiff'
+alias wget='wget -c'
+alias netstat_osx='sudo lsof -i -n -P | grep LISTEN'
+alias foo='foodcritic -I ~/blip/git/chef11/standards/foodcritic-rules/rules.rb $@'
+alias activate='source ./env/bin/activate'
+alias jk='jekyll serve --watch --verbose'
+
+alias dins='docker inspect -f'
+alias drm="docker rm"
+alias drmi="docker rmi"
+alias dps="docker ps -a"
+alias dimg="docker images"
+alias dviz="docker images --viz"
+alias dtree="docker images --tree"
+alias drun="docker run -p 8001:8001 -i -t builder_centos-6.5_betfair /bin/bash"
+alias dexec="docker ps;docker exec -it"
+alias dui="docker run -d -p 9000:9000 --privileged dockerui/dockerui -e http://coreos01:2375"
+
+
+if [ $UID -ne 0 ]; then
+    alias dmesg='sudo dmesg'
+    alias htop='sudo htop'
 fi
 
-if ! shopt -q login_shell ; then # We're not a login shell
-    # Need to redefine pathmunge, it get's undefined at the end of /etc/profile
-    pathmunge () {
-        case ":${PATH}:" in
-            *:"$1":*)
-                ;;
-            *)
-                if [ "$2" = "after" ] ; then
-                    PATH=$PATH:$1
-                else
-                    PATH=$1:$PATH
-                fi
-        esac
-    }
+# Funky Funcs
+passgen(){ perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*10000)' | shasum | base64 | head -c 15;echo; }
+macgenxen(){ printf '00:16:3E:%02X:%02X:%02X\n' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)); }
+certexplode(){ awk ' split_after == 1 {n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {print > "cert_" n ".pem"}' < $1 && for I in `ls cert_*` ; do echo -e "------------------\n"; openssl x509 -in $I -text |grep 'C='; done }
 
-    # By default, we want umask to get set. This sets it for non-login shell.
-    # Current threshold for system reserved uid/gids is 200
-    # You could check uidgid reservation validity in
-    # /usr/share/doc/setup-*/uidgid file
-    if [ $UID -gt 199 ] && [ "`id -gn`" = "`id -un`" ]; then
-       umask 002
-    else
-       umask 022
-    fi
+# cdargs
+function cdb () {
+  cdargs "$1" && cd "`cat "$HOME/.cdargsresult"`" ;
+}
 
-    # Only display echos from profile.d scripts if we are no login shell
-    # and interactive - otherwise just process them to set envvars
-    for i in /etc/profile.d/*.sh; do
-        if [ -r "$i" ]; then
-            if [ "$PS1" ]; then
-                . "$i"
-            else
-                . "$i" >/dev/null
-            fi
-        fi
-    done
+# git
+function gitpullall() {
+  CWD=`pwd`; find $PWD -type d -name .git -print0 | xargs -0 -I{} dirname {} | xargs -I{} sh -c 'cd {}; echo "GIT pulling {}"; git pull; git submodule update --recursive'
+}
+function gitinfoall() {
+  CWD=`pwd`; find $PWD -type d -name .git -print0 | xargs -0 -I{} dirname {} | xargs -I{} sh -c 'cd {}; git config --get remote.origin.url'
+}
 
-    unset i
-    unset -f pathmunge
+# auto-complete
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
 fi
 
-##########################
-# blog.kintoandar.com
-##########################
+# ansible
+export ANSIBLE_HOST_KEY_CHECKING=False
+export ANSIBLE_NOCOWS=1
 
-eval `dircolors ~/install/dircolors-solarized/dircolors.256dark`
+# git-prompt
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+#export GIT_PS1_SHOWUPSTREAM="auto"
+source ~/.git-prompt.sh
 
-#PS1='\[\e[3;31m\]\u@\h:\w#\[\e[0m\] '
-#JAVA_HOME=/opt/install/jdk1.7.0_45
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/
 #PATH=$PATH:/opt/install/protectserver/ETcprt/bin/linux-i386
 #LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/install/protectserver/ETcprt/lib/linux-i386
 #export LD_LIBRARY_PATH PATH
@@ -102,45 +106,7 @@ eval `dircolors ~/install/dircolors-solarized/dircolors.256dark`
 #export LD_LIBRARY_PATH="${ORACLE_HOME}/lib"
 #export TNS_ADMIN="${ORACLE_HOME}"
 
-PATH=$PATH:~/.chef/scripts:~/.local/bin
-
-export EDITOR='/usr/bin/vim'
-export HISTTIMEFORMAT='%F %T '
-export HISTCONTROL=ignoredups erasedups
-export HISTSIZE=5000
-export HISTFILESIZE=240000
-
-# color man pages
-export MANPAGER="/usr/bin/most -s"
-
-# serial
-export MINICOM="-m -c on"
-
-# Alias definitions
-alias ll='ls -lha --color=auto'
-alias vi='vim'
-alias ws="python -m SimpleHTTPServer"
-alias sshuttle="~/install/sshuttle/sshuttle -r user@localhost:3070 172.20.0.0/16 -D"
-alias portecle="java -jar ~/install/portecle-1.7/portecle.jar &"
-alias sshconf='vi ~/.ssh/config'
-alias json='python -m json.tool'
-alias rubyverify='tail -n +2 $1 | ruby -c'
-alias diffcookbook='diff -wru $(ls|sort|head -n1) $(ls|sort|tail -n1)|vim -'
-
-# Funky Funcs
-passgen(){ < /dev/urandom tr -dc A-Za-z0-9 | head -c${1:-9};echo;}
-macgenxen(){ printf '00:16:3E:%02X:%02X:%02X\n' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)); }
-certexplode(){ awk ' split_after == 1 {n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {print > "cert_" n ".pem"}' < $1 && for I in `ls cert_*` ; do echo -e "------------------\n"; openssl x509 -in $I -text |grep 'C='; done }
-
-# cdargs
-source /usr/share/doc/cdargs/examples/cdargs-bash.sh
-
-# ansible
-source ~/install/ansible/hacking/env-setup -q
-export ANSIBLE_HOST_KEY_CHECKING=False
-export ANSIBLE_NOCOWS=1
-
-# GIT SVN stuff
-export GIT_PS1_SHOWDIRTYSTATE=1
-source ~/.git-prompt.sh
-PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
+# docker
+export DOCKER_HOST=tcp://coreos01:2375
+#export DOCKER_HOST=tcp://mirage:2375
+#export DOCKER_HOST=tcp://coreos2:2375

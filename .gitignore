@@ -1,14 +1,9 @@
-##########################
-# blog.kintoandar.com
-##########################
-
 # Compiled source 
 *.class
 *.dll
 *.exe
 *.o
 *.so
-
 # Packages 
 *.7z
 *.dmg
@@ -20,12 +15,10 @@
 *.zip
 *.rpm
 *.deb
-
 # Logs and databases
 *.log
 *.sql
 *.sqlite
-
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -34,30 +27,23 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Emacs backup files
+# Emacs backup files...
 *~
 .\#*
-
 # Vim swap files
 *.swp
 *.swo
-
-# RPM stuff
+# RPM stuff...
 MANIFEST
 dist
 rpm-build
-
-# Eclipse/PyDev stuff
+# Eclipse/PyDev stuff...
 .project
 .pydevproject
-
-# PyCharm stuff
 .idea
-
-# IntelliJ IDEA stuff
+*.py[cod]
+# IntelliJ IDEA stuff..
 *.iml
-
-# Sublime stuff
+# Sublime stuff...
 *.sublime-project
 *.sublime-workspace
