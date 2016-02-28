@@ -28,7 +28,7 @@ function set_ruby () {
     RUBY_ENV="${RED}[rb]${RSTCOLOR} "
   else
     RUBY_ENV=""
-	fi
+  fi
 }
 
 # set the full bash prompt.
@@ -40,17 +40,17 @@ function set_bash_prompt () {
   # set the PYTHON_VIRTUALENV variable.
   set_virtualenv
 
-	# set rvm usage
+  # set rvm usage
   set_ruby
 
   # set the bash prompt variable.
   PS1="${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash) ${PROMPT_SYMBOL} "
 
-	# sync history cross tabs
-	history -a; history -c;	history -r
+  # sync history cross tabs
+  history -a; history -c;history -r
 
-	# set tab path
-	echo -ne "\033]0;${PWD/#$HOME/~}\007"
+  # set tab path
+  echo -ne "\033]0;${PWD/#$HOME/~}\007"
 }
 
 PROMPT_COMMAND=set_bash_prompt
