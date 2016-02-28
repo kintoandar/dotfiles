@@ -1,6 +1,7 @@
 [user]
 	name = Joel Bastos
 	email = joel.bastos@example.com
+  signingkey = EXAMPLE
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -11,14 +12,33 @@
 	interactive = auto
 [merge]
 	tool = vimdiff
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
 [alias]
   b = branch
   st = status -sb
   ci = commit
   co = checkout
   up = checkout
-  d  = diff
+  d  = difftool
   dp = diff --patience
   dc = diff --cached
   dcp = diff --cached --patience
   gl = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  hist = log --graph --decorate --pretty=format:'%h %Cred %ad %Cgreen %s%d %Cblue %an' --date=short --abbrev-commit --all
+  info = config --get remote.origin.url
+  unadd = reset HEAD
+  uncommit = reset --soft HEAD~
+  nuclear = !git fetch origin && git reset --hard origin/master
+[push]
+	default = current
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[pull]
+	rebase = true
+[init]
+	templatedir = ~/.git-templates/
