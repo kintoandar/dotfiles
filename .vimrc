@@ -29,7 +29,7 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-set cursorline 
+set cursorline
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
@@ -39,20 +39,25 @@ nnoremap j gj
 nnoremap k gk
 " Make backspace work
 set backspace=indent,eol,start
-" Use relative line numbers
-"set relativenumber
-
 filetype plugin on " load plugins
-set listchars=tab:▸\ ,eol:¬
-
+highlight SpecialKey term=standout ctermbg=red guibg=red
+set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<,nbsp:_
 " Maintain viminfo file
 set viminfo='10,\"100,:20,%,n~/.vimstash/viminfo
 
 set backupdir=~/.vimstash/backups
 set directory=~/.vimstash/swaps
 if exists("&undodir")
+  set undofile
   set undodir=~/.vimstash/undo
 endif
+
+augroup vimrc
+  autocmd!
+augroup END
+
+" Restore last edit location when opening a file
+autocmd vimrc BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 
 """"""""" SEARCH """"""""
 set ignorecase " Ignore case when searching
@@ -73,7 +78,7 @@ let mapleader = ","
 nnoremap <leader><space> :noh<cr>
 
 " Meh, using leader key is much faster!
-noremap <F2> :NERDTreeToggle<CR>
+noremap <F2> :set fileformat=unix<CR>
 noremap <F3> :set list!<CR>
 noremap <F4> :GundoToggle<CR>
 noremap <F5> :set paste!<CR>
@@ -87,8 +92,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>p :set paste!<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>l :set list!<CR>
-nnoremap <leader>n :set relativenumber!<CR>
-nnoremap <leader>N :set number!<CR>
+nnoremap <leader>n :set relativenumber! number!<CR>
 nnoremap <leader>g :GitGutterSignsToggle<CR>
 nnoremap <leader>c :NeoComplCacheEnable<CR>
 nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
@@ -96,14 +100,15 @@ nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 nnoremap <leader>s :w !sudo tee %<CR>
 
 " buffer navigation
-map gn :bn<cr>
-map gp :bp<cr>
-map gd :bd<cr>
+map gl :bn<cr>
+map gh :bp<cr>
+map gd :bd<CR>
+map gb :ls<CR>
 
 """""""" FILETYPE SPECIFICS """"""""
 
 """""""" PYTHON
-au FileType python setlocal expandtab tabstop=4 shiftwidth=4
+au FileType python setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=79
 
 """""""" RUBY
 au FileType ruby setlocal expandtab tabstop=2 shiftwidth=2
@@ -129,6 +134,7 @@ let g:ycm_register_as_syntastic_checker=0
 let g:ycm_auto_trigger=1
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+let g:ycm_path_to_python_interpreter = '/usr/local/Cellar/python/2.7.11/bin/python'
 
 """""""" ULTISNIPS
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -146,6 +152,7 @@ let g:syntastic_style_warning_symbol = '>'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
+let g:syntastic_python_flake8_args='--ignore=F403'
 "let g:syntastic_disabled_filetypes = ['html']
 "let g:syntastic_json_checker = "jsonlint"
 "let g:syntastic_ruby_checkers = ['rubocop']
@@ -163,7 +170,7 @@ let g:ctrlp_custom_ignore = {
 " Open as tab
 let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': ['<c-t>'],
-  \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+  \ 'AcceptSelection("b")': ['<cr>', '<2-LeftMouse>'],
 \}
 
 """""""" NERDTree
@@ -172,6 +179,7 @@ let g:ctrlp_prompt_mappings = {
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_detect_paste=1
 "let g:airline#extensions#tabline#fnamemod = ':t'
 " Workaround for leaving insert mode delay with statusline active
 if ! has('gui_running')
