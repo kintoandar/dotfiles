@@ -1,0 +1,19 @@
+alias ll='ls -lhaG'
+alias grep='grep --color=auto'
+alias vi='vim'
+alias ws='echo $(ifconfig | grep -E "en.:" -A 3 | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b") ; python -m SimpleHTTPServer'
+alias h='history|awk '"'"'{$1=$2="";print substr($0,3)}'"'"''
+alias jsonprint='python -m json.tool'
+alias rubyverify='tail -n +2 $1 | ruby -c'
+alias diff='colordiff'
+alias wget='wget -c'
+alias netstatosx='sudo lsof -i -n -P | grep LISTEN'
+alias routeosx='netstat -r'
+alias envactivate='source ./*/bin/activate'
+alias jk='jekyll serve --watch --verbose'
+alias curlng='/usr/local/Cellar/curl/7.46.0/bin/curl'
+
+if [ $UID -ne 0 ]; then
+    alias dmesg='sudo dmesg'
+    alias htop='sudo htop'
+fi

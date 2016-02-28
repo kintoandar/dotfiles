@@ -1,0 +1,15 @@
+export DOCKER_HOST=tcp://coreos01:2375
+
+alias dins='docker inspect -f'
+alias drm="docker rm"
+alias drmi="docker rmi"
+alias dps="docker ps -a"
+alias dimg="docker images"
+alias dviz="docker images --viz"
+alias dtree="docker images --tree"
+alias dstart="docker start"
+alias dstop="docker stop"
+
+function drun { docker run -i -t --rm $* /bin/bash; }
+function dexec { docker exec -i -t $* /bin/bash; }
+function dup { docker run -d -p 8080:8080 --privileged $*; }

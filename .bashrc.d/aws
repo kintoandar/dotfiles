@@ -1,0 +1,3 @@
+PATH=$PATH:/opt/install/ec2-api-tools/bin
+
+export EC2_HOME=/opt/install/ec2-api-tools

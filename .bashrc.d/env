@@ -1,0 +1,20 @@
+export LC_ALL="en_US.UTF-8"
+export LANG="C"
+
+# history
+export HISTTIMEFORMAT='%y-%m-%d  '
+export HISTCONTROL=ignoredups:erasedups
+export HISTSIZE=50000
+shopt -s histappend
+
+# vim
+export EDITOR='vim'
+
+# fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+# vault
+export VAULT_ADDR=http://127.0.0.1:8200
+
+# java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/

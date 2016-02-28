@@ -1,0 +1,3 @@
+PATH=$PATH:~/.chef/scripts
+
+[ -x /opt/chefdk/bin/chef ] && eval "$(/opt/chefdk/bin/chef shell-init bash)"

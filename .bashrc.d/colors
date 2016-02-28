@@ -1,0 +1,13 @@
+# colors
+export RED="\[\033[0;31m\]"
+export YELLOW="\[\033[0;33m\]"
+export GREEN="\[\033[0;32m\]"
+export BLUE="\[\033[0;34m\]"
+export PINK="\[\033[0;35m\]"
+export CYAN="\[\033[0;36m\]"
+export ORANGE="\[\033[1;31m\]"
+export DARK_GRAY="\[\033[1;32m\]"
+export WHITE="\[\033[0;37m\]"
+export LIGHT_GRAY="\[\033[0;38m\]"
+export COLOR_NONE="\[\e[0m\]"
+export RSTCOLOR="\[\e[0m\]"

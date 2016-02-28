@@ -1,0 +1,5 @@
+PATH=$PATH:\
+/opt/install/packer:\
+/opt/install/terraform
+
+alias vagrantstatus='vagrant global-status'
