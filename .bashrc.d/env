@@ -4,6 +4,7 @@ export LANG="C"
 # history
 export HISTTIMEFORMAT='%y-%m-%d  '
 export HISTCONTROL=ignoredups:erasedups
+export HISTIGNORE="ll:ls*:history"
 export HISTSIZE=50000
 shopt -s histappend
 
