@@ -6,13 +6,24 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
+"YouCompleteMe
+"ag.vim
+"ctrlp.vim
+"gundo.vim nerdtree
+"syntastic
+"ultisnips
+"vim-airline
+"vim-fugitive
+"vim-json
+"vim-ruby
+"vim-snippets
+"
 """""""" COLOR SCHEME """"""""
-"let g:solarized_termcolors=256
+""let g:solarized_termcolors=256
+colorscheme solarized
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme solarized
-"syntax on                " syntax highlight
 
 """""""" GLOBAL """"""""
 set nocompatible          " old vi compatibility
@@ -105,13 +116,19 @@ map gh :bp<cr>
 map gd :bd<CR>
 map gb :ls<CR>
 
+" hardmode
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
+
 """""""" FILETYPE SPECIFICS """"""""
 
 """""""" PYTHON
-au FileType python setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=79
+au FileType python setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=120
 
 """""""" RUBY
-au FileType ruby setlocal expandtab tabstop=2 shiftwidth=2
+au FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=120
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 
 """""""" PERL
@@ -153,6 +170,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_python_flake8_args='--ignore=F403'
+let g:syntastic_python_flake8_args = "--max-line-length=120"
 "let g:syntastic_disabled_filetypes = ['html']
 "let g:syntastic_json_checker = "jsonlint"
 "let g:syntastic_ruby_checkers = ['rubocop']
