@@ -44,10 +44,10 @@ function set_bash_prompt () {
   set_ruby
 
   # set the bash prompt variable.
-  PS1="${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash) ${PROMPT_SYMBOL} "
+  PS1="${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash --fetch) ${PROMPT_SYMBOL} "
 
   # sync history cross tabs
-  history -a; history -c;history -r
+  history -a; history -c; history -r
 
   # set tab path
   echo -ne "\033]0;${PWD/#$HOME/~}\007"
