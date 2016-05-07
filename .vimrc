@@ -17,7 +17,8 @@ execute pathogen#helptags()
 "vim-json
 "vim-ruby
 "vim-snippets
-"
+"jedi-vim
+
 """""""" COLOR SCHEME """"""""
 ""let g:solarized_termcolors=256
 colorscheme solarized
@@ -162,15 +163,16 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""" SYNTASTIC
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = 'X'
+let g:syntastic_error_symbol = 'x'
 let g:syntastic_warning_symbol = '!'
-let g:syntastic_style_error_symbol = '>'
+let g:syntastic_style_error_symbol = '>>'
 let g:syntastic_style_warning_symbol = '>'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_enable_signs = 1
-let g:syntastic_quiet_messages = {'level': 'warnings'}
+"let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_python_flake8_args='--ignore=F403'
 let g:syntastic_python_flake8_args = "--max-line-length=120"
+let g:syntastic_python_checkers = ['flake8', 'pylint']
 "let g:syntastic_disabled_filetypes = ['html']
 "let g:syntastic_json_checker = "jsonlint"
 "let g:syntastic_ruby_checkers = ['rubocop']
