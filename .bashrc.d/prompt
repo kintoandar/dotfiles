@@ -25,7 +25,7 @@ function set_virtualenv () {
 # detect rvm usage
 function set_ruby () {
   if [[ $GEM_HOME =~ .*rvm.* ]] ; then
-    RUBY_ENV="${ORANGE}${GEM_HOME##*/}${RSTCOLOR} "
+    RUBY_ENV="${ORANGE}[${GEM_HOME##*/}]${RSTCOLOR} "
   else
     RUBY_ENV=""
   fi
