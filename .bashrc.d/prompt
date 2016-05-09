@@ -18,14 +18,14 @@ function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
     PYTHON_VIRTUALENV=""
   else
-    PYTHON_VIRTUALENV="${RED}[py]${RSTCOLOR} "
+    PYTHON_VIRTUALENV="${RED}[${VIRTUAL_ENV##*/}]${RSTCOLOR} "
   fi
 }
 
 # detect rvm usage
 function set_ruby () {
   if [[ $GEM_HOME =~ .*rvm.* ]] ; then
-    RUBY_ENV="${RED}[rb]${RSTCOLOR} "
+    RUBY_ENV="${ORANGE}${GEM_HOME##*/}${RSTCOLOR} "
   else
     RUBY_ENV=""
   fi
