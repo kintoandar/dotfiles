@@ -1,4 +1,6 @@
 dotfiles
-========
+=================
+Assorted `.dotfiles` for fun and profit
 
-Assorted dotfiles
+# Credits
+Made with ♥️ by kintoandar
