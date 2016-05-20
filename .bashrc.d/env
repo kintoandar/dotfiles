@@ -19,3 +19,6 @@ export VAULT_ADDR=http://127.0.0.1:8200
 
 # java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/
+
+# python
+source /usr/local/bin/virtualenvwrapper.sh
