@@ -42,3 +42,11 @@ function p12topem { openssl pkcs12 -in $1 -out $2 -clcerts; }
 function pemtop12 { openssl pkcs12 -export -inkey $1 -in $1 -out $2 ; }
 function pemserver { echo '0:4433' ; openssl s_server -cert $1 -key $2 -www; }
 
+# opensource git config
+function git-config-opensource {
+  git config credential.helper store
+  git config user.name "Joel Bastos"
+  git config user.email "kintoandar@gmail.com"
+  git config commit.gpgsign true
+  git config --global gitreview.username "kintoandar"
+}
