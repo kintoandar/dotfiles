@@ -1,5 +1,6 @@
 # ruby
 function envrvm() { source $HOME/.rvm/scripts/rvm && rvm use 2.3.0 --default; }
+function envrvm_disable() { rvm use system; }
 
 # helpful functions
 function passgen(){ openssl rand -base64 32 | base64 | head -c 16; }
