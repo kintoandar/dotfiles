@@ -26,6 +26,14 @@ function gitinfoall() {
   'cd {}; git config --get remote.origin.url'
 }
 
+vimremote(){
+  if [ $# -ne 3 ]; then
+    echo "ARGS: <user> <host>[:port] <full_path_to_file>"
+  else
+    vim scp://$1@$2//$3
+  fi
+}
+
 # PKI
 function jksprint { keytool -v -list -keystore $1; }
 function pemprint { openssl x509 -in $1 -noout -issuer -subject -dates -fingerprint -serial; }
