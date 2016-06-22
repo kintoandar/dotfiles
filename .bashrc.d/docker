@@ -1,12 +1,12 @@
-export DOCKER_HOST=tcp://coreos01:2375
+#export DOCKER_HOST=tcp://coreos01:2375
+export DOCKER_HOST=
 
 alias dins='docker inspect -f'
 alias drm="docker rm"
 alias drmi="docker rmi"
 alias dps="docker ps -a"
 alias dimg="docker images"
-alias dviz="docker images --viz"
-alias dtree="docker images --tree"
+alias dtree="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz images -t"
 alias dstart="docker start"
 alias dstop="docker stop"
 
