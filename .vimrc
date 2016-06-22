@@ -136,7 +136,7 @@ au BufRead,BufNewFile Vagrantfile set filetype=ruby
 "au FileType perl setlocal tabstop=8 expandtab shiftwidth=8 softtabstop=8
 
 """""""" BASH
-"au FileType sh setlocal tabstop=8 expandtab shiftwidth=8 softtabstop=8
+au FileType sh setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
 """""""" YAML
 "au BufNewFile,BufRead *.yaml,*.yml setf yaml
