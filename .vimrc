@@ -126,7 +126,7 @@ map gb :ls<CR>
 """""""" FILETYPE SPECIFICS """"""""
 
 """""""" PYTHON
-au FileType python setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=120
+au FileType python setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=80
 
 """""""" RUBY
 au FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=120
