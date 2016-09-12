@@ -4,24 +4,38 @@
 
 set editor="vim"
 
-set from = "joel.bastos@example.com"
+set from = "kintoandar@gmail.com"
 set realname = "Joel Bastos"
 
-#set imap_user = "jbastos@mail.example.com"
-#set imap_pass = ""
+set use_from = yes
+set envelope_from = yes
 
-set folder="imaps://jbastos@mail.example.com/"
-set spoolfile="imaps://jbastos@mail.example.com/INBOX"
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+bind index <space> collapse-thread
+bind pager <up> previous-line
+bind pager <down> next-line
 
-#set imap_pass="mypassword"
+# G to get mail
+bind index G imap-fetch-mail
+unset record
+set move = no
+set charset = "utf-8"
 
-set mbox="!"
+set imap_user = "kintoandar@gmail.com"
+set imap_pass = ""
 
-set smtp_url = "smtp://proxy.example.inet:25/"
+set smtp_authenticators = 'login'
+set smtp_url = "smtps://kintoandar@gmail.com@smtp.gmail.com:465/"
+set smtp_pass = ""
+
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+set ssl_starttls = yes
 
 set header_cache =~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
 set certificate_file =~/.mutt/certificates
 
-bind index G imap-fetch-mail
-bind pager G imap-fetch-mail
+source ~/dotfiles/mutt-colors-solarized-light-16.muttrc
