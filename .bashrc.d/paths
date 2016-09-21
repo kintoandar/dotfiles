@@ -1,3 +1,4 @@
 PATH=$PATH:\
 /usr/local/sbin:\
-~/bin
+~/bin:\
+~/Documents/myprojects/go/bin
