@@ -1,10 +1,9 @@
-source_scripts()
-{
-  for script in $@; do
+source_scripts(){
+  for script in "$@"; do
     # skip non-executable snippets
     [ -x "$script" ] || continue
       # execute $script in the context of the current shell
-      . $script
+      source $script
   done
 }
 
