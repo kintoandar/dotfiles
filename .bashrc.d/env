@@ -24,3 +24,9 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.12/bin/python
 export VIRTUALENV_PYTHON=/usr/local/Cellar/python/2.7.12/bin/python
 source /usr/local/bin/virtualenvwrapper.sh
+
+# go
+export GOPATH=$HOME/Documents/myprojects/go
+
+# gpg
+export GPG_TTY="$(tty)"
