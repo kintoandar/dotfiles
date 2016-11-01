@@ -26,6 +26,10 @@ function gitinfoall() {
   'cd {}; git config --get remote.origin.url'
 }
 
+ssh-no-key (){
+  ssh -v -o PreferredAuthentications=password -o PubkeyAuthentication=no "$@"
+}
+
 vimremote(){
   if [ $# -ne 3 ]; then
     echo "ARGS: <user> <host>[:port] <full_path_to_file>"
