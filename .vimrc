@@ -138,6 +138,9 @@ au BufRead,BufNewFile Vagrantfile set filetype=ruby
 """""""" BASH
 au FileType sh setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
+"""""""" C
+au Filetype c setlocal shiftwidth=8 tabstop=8 noexpandtab colorcolumn=80
+
 """""""" YAML
 "au BufNewFile,BufRead *.yaml,*.yml setf yaml
 
@@ -173,6 +176,7 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_python_flake8_args='--ignore=F403'
 let g:syntastic_python_flake8_args = "--max-line-length=120"
 let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_c_checkers = ['checkpatch', 'gcc', 'make']
 "let g:syntastic_disabled_filetypes = ['html']
 "let g:syntastic_json_checker = "jsonlint"
 "let g:syntastic_ruby_checkers = ['rubocop']
