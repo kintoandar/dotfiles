@@ -43,6 +43,7 @@ function jksprint { keytool -v -list -keystore $1; }
 function pemprint { openssl x509 -in $1 -noout -issuer -subject -dates -fingerprint -serial; }
 function pemprintfull { openssl x509 -in $1 -text -noout; }
 function pemget { echo | openssl s_client -showcerts -connect $1; }
+function pemgetsplit { echo | openssl s_client -showcerts -connect $1 2> /dev/null | awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++} inc {print > ("level" c ".crt")} /---END CERTIFICATE-----/{inc=0}'; }
 function pemcachain { openssl verify -CAfile $1 $2; }
 function pemmodpriv { openssl rsa -noout -modulus -in $1 | md5; }
 function pemmodpub { openssl x509 -noout -modulus -in $1 | md5; }
