@@ -155,7 +155,7 @@ let g:ycm_register_as_syntastic_checker=0
 let g:ycm_auto_trigger=1
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-let g:ycm_path_to_python_interpreter = '/usr/local/Cellar/python/2.7.11/bin/python'
+let g:ycm_path_to_python_interpreter = '/usr/local/Cellar/python/2.7.13/bin/python'
 
 """""""" ULTISNIPS
 let g:UltiSnipsExpandTrigger="<tab>"
