@@ -1,4 +1,5 @@
 PATH=$PATH:\
 /usr/local/sbin:\
+~/.rvm/bin:\
 ~/bin:\
 ~/Documents/myprojects/go/bin

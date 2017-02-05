@@ -4,3 +4,6 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 eval "$(direnv hook bash)"
+
+# rvm
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion

@@ -30,3 +30,6 @@ export GOPATH=$HOME/Documents/myprojects/go
 
 # gpg
 export GPG_TTY="$(tty)"
+
+# rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
