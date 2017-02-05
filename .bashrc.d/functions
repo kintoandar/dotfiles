@@ -38,13 +38,13 @@ vimremote(){
   fi
 }
 
-passthis(){
-  if [ $# -ne 3 ]; then
-    echo "ARGS: <account> <app> <keychain>"
-  else
-    security find-generic-password -a $1 -s $2 -w ~/Library/Keychains/$3.keychain | tr -d "\n"
-  fi
-}
+#passthis(){
+#  if [ $# -ne 3 ]; then
+#    echo "ARGS: <account> <app> <keychain>"
+#  else
+#    security find-generic-password -a $1 -s $2 -w ~/Library/Keychains/$3.keychain | tr -d "\n"
+#  fi
+#}
 
 # PKI
 function jksprint { keytool -v -list -keystore $1; }
