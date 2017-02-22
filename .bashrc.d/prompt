@@ -18,7 +18,7 @@ function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
     PYTHON_VIRTUALENV=""
   else
-    PYTHON_VIRTUALENV="${RED}[${VIRTUAL_ENV##*/}]${RSTCOLOR} "
+    PYTHON_VIRTUALENV="${BLUE}[${VIRTUAL_ENV##*/}]${RSTCOLOR} "
   fi
 }
 
@@ -28,6 +28,15 @@ function set_ruby () {
     RUBY_ENV="${ORANGE}[${GEM_HOME##*/}]${RSTCOLOR} "
   else
     RUBY_ENV=""
+  fi
+}
+
+# detect AWS environment
+function set_ruby () {
+  if [[ "x$AWS_ENV" != "x" ]] ; then
+    AWS_ENV_="${YELLOW}[${AWS_ENV##*/}]${RSTCOLOR} "
+  else
+    AWS_ENV_=""
   fi
 }
 
@@ -44,7 +53,7 @@ function set_bash_prompt () {
   set_ruby
 
   # set the bash prompt variable.
-  PS1="${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash --fetch) ${PROMPT_SYMBOL} "
+  PS1="${AWS_ENV_}${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash --fetch) ${PROMPT_SYMBOL} "
 
   # sync history cross tabs
   history -a; history -c; history -r
