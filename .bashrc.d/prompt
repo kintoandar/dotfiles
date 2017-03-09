@@ -32,7 +32,7 @@ function set_ruby () {
 }
 
 # detect AWS environment
-function set_ruby () {
+function set_aws () {
   if [[ "x$AWS_ENV" != "x" ]] ; then
     AWS_ENV_="${YELLOW}[${AWS_ENV##*/}]${RSTCOLOR} "
   else
@@ -51,6 +51,9 @@ function set_bash_prompt () {
 
   # set rvm usage
   set_ruby
+
+  # set aws environment
+  set_aws
 
   # set the bash prompt variable.
   PS1="${AWS_ENV_}${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash --fetch) ${PROMPT_SYMBOL} "
