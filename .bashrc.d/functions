@@ -62,6 +62,7 @@ function pemkeyremove { openssl rsa -in $1 -out $2; }
 function p12topem { openssl pkcs12 -in $1 -out $2 -clcerts; }
 function pemtop12 { openssl pkcs12 -export -inkey $1 -in $1 -out $2 ; }
 function pemserver { echo '0:4433' ; openssl s_server -cert $1 -key $2 -www; }
+function pemgetprint { echo | openssl s_client -showcerts -connect $1 | openssl x509 -in /dev/stdin -text -noout; }
 
 # opensource git config
 function git-config-opensource {
