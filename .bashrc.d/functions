@@ -1,5 +1,5 @@
 # ruby
-function envrvm() { source $HOME/.rvm/scripts/rvm && rvm use 2.3.0 --default; }
+function envrvm() { source $HOME/.rvm/scripts/rvm && rvm use 2.4.0 --default; }
 function envrvm_disable() { rvm use system; }
 
 # helpful functions
@@ -24,6 +24,16 @@ function gitinfoall() {
   CWD=`pwd`; find $PWD -type d -name .git -print0 |\
   xargs -0 -I{} dirname {} | xargs -I{} sh -c \
   'cd {}; git config --get remote.origin.url'
+}
+
+function tcp-get {
+  if [ $# -ne 2 ]; then
+    echo "ARGS: <host> <port>"
+  else
+    exec 3<>/dev/tcp/$1/$2
+    echo -e "GET / HTTP/1.1\r\nConnection: close\r\n\r\n" >&3
+    cat <&3
+  fi
 }
 
 ssh-no-key (){

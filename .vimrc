@@ -136,7 +136,7 @@ au BufRead,BufNewFile Vagrantfile set filetype=ruby
 "au FileType perl setlocal tabstop=8 expandtab shiftwidth=8 softtabstop=8
 
 """""""" BASH
-au FileType sh setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType sh setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2 colorcolumn=80
 
 """""""" C
 au Filetype c setlocal shiftwidth=8 tabstop=8 noexpandtab colorcolumn=80
@@ -180,6 +180,10 @@ let g:syntastic_c_checkers = ['checkpatch', 'gcc', 'make']
 "let g:syntastic_disabled_filetypes = ['html']
 "let g:syntastic_json_checker = "jsonlint"
 "let g:syntastic_ruby_checkers = ['rubocop']
+
+"""""""" GO LINT
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 """""""" VIM-GUTTER
 let g:gitgutter_max_signs = 500

@@ -16,9 +16,10 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # vault
 export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_TOKEN=
 
 # java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/
 
 # python
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.13/bin/python
