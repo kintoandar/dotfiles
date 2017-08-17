@@ -60,8 +60,10 @@ vimremote(){
 function jksprint { keytool -v -list -keystore $1; }
 function pemprint { openssl x509 -in $1 -noout -issuer -subject -dates -fingerprint -serial; }
 function pemprintfull { openssl x509 -in $1 -text -noout; }
-function pemget { echo | openssl s_client -showcerts -connect $1; }
+function pemget { echo | openssl s_client -showcerts -connect $1;}
+function pemgetserver { echo | openssl s_client -showcerts -connect $1 -servername ${1%:443};}
 function pemgetsplit { echo | openssl s_client -showcerts -connect $1 2> /dev/null | awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++} inc {print > ("level" c ".crt")} /---END CERTIFICATE-----/{inc=0}'; }
+function pemsplit { cat $1 | awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++} inc {print > ("level" c ".crt")} /---END CERTIFICATE-----/{inc=0}'; }
 function pemcachain { openssl verify -CAfile $1 $2; }
 function pemmodpriv { openssl rsa -noout -modulus -in $1 | md5; }
 function pemmodpub { openssl x509 -noout -modulus -in $1 | md5; }
@@ -81,4 +83,8 @@ function git-config-opensource {
   git config user.email "kintoandar@gmail.com"
   git config commit.gpgsign true
   git config --global gitreview.username "kintoandar"
+}
+
+function git-open {
+  open $(git remote -v | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#http://#' -e 's@com:@com/@') | head -n1
 }
