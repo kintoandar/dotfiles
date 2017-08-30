@@ -3,7 +3,15 @@ function envrvm() { source $HOME/.rvm/scripts/rvm && rvm use 2.4.0 --default; }
 function envrvm_disable() { rvm use system; }
 
 # helpful functions
-function passgen(){ openssl rand -base64 32 | base64 | head -c 16; }
+function passgenold() { openssl rand -base64 32 | base64 | head -c 16; }
+function passgen() {
+  if [ $# -ne 1 ]; then
+    echo "ARGS: <lenght>"
+  else
+    pwgen -s $1 1 | tr -d '\n' | pbcopy && pbpaste && echo -e "\n==> Sent to clipboard"
+  fi
+}
+
 function macgenxen(){
   printf '00:16:3E:%02X:%02X:%02X\n' \
   $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256));
