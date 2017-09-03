@@ -40,6 +40,15 @@ function set_aws () {
   fi
 }
 
+# detect kube context
+function set_kube () {
+  if [[ "x$KUBE_CTX" != "x" ]] ; then
+    KUBE_CTX_="${CYAN}[${KUBE_CTX##*/}]${RSTCOLOR} "
+  else
+    KUBE_CTX_=""
+  fi
+}
+
 # set the full bash prompt.
 function set_bash_prompt () {
   # set the PROMPT_SYMBOL variable. We do this first so we don't lose the
@@ -55,8 +64,11 @@ function set_bash_prompt () {
   # set aws environment
   set_aws
 
+  # set kube context
+  set_kube
+
   # set the bash prompt variable.
-  PS1="${AWS_ENV_}${PYTHON_VIRTUALENV}${RUBY_ENV}${GREEN}\w${RSTCOLOR}\$(git-radar --bash --fetch) ${PROMPT_SYMBOL} "
+  PS1="${AWS_ENV_}${PYTHON_VIRTUALENV}${RUBY_ENV}${KUBE_CTX_}${GREEN}\w${RSTCOLOR}\$(git-radar --bash --fetch) ${PROMPT_SYMBOL} "
 
   # sync history cross tabs
   history -a; history -c; history -r
