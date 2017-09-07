@@ -6,6 +6,20 @@ function kube_ctx {
   export KUBE_CTX="$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')"
 }
 
+function ku {
+  if [[ "x$KUBE_CTX" == "x" ]] ; then
+     kube_ctx
+     read -p "[${KUBE_CTX}] is currently enabled, press any key to proceed..."
+     kubectl "$@"
+   elif [[ "$KUBE_CTX" != "$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')" ]] ; then
+     kube_ctx
+     read -p "[${KUBE_CTX}] is currently enabled, press any key to proceed..."
+     kubectl "$@"
+   else
+     kubectl "$@"
+   fi
+}
+
 function kube_nodes {
   kubectl get nodes -o json | jq -r '.items[] | {"role": .metadata.labels."kubernetes.io/role", "network": .status.addresses[] | select(.type=="InternalIP")} | (.network.address +" #"+ .role)'
 }
