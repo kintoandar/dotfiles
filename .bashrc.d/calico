@@ -1,2 +1,0 @@
-export DATASTORE_TYPE=kubernetes
-export KUBECONFIG=~/.kube/config

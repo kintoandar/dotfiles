@@ -28,6 +28,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # go
 export GOPATH=$HOME/Documents/myprojects/go
+export GOBIN=$GOPATH/bin
 
 # gpg
 export GPG_TTY="$(tty)"

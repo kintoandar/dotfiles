@@ -96,7 +96,3 @@ function git-config-opensource {
 function git-open {
   open $(git remote -v | grep -v heroku | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#http://#' -e 's@com:@com/@') | head -n1
 }
-
-function kube_ctx {
-  export KUBE_CTX="$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')"
-}
