@@ -10,7 +10,8 @@ execute pathogen#helptags()
 "ag.vim
 "ctrlp.vim
 "gundo.vim nerdtree
-"syntastic
+"OLD: syntastic
+"ALE - Asynchronous Lint Engine
 "ultisnips
 "vim-airline
 "vim-fugitive
@@ -41,7 +42,8 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-set cursorline
+"Heads up: slow scrolling
+"set cursorline
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
@@ -157,6 +159,9 @@ let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 let g:ycm_path_to_python_interpreter = '/usr/local/Cellar/python/2.7.13/bin/python'
 
+"""""""" deoplete
+"let g:deoplete#enable_at_startup = 1
+
 """""""" ULTISNIPS
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
@@ -164,22 +169,30 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 """""""" SYNTASTIC
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = 'x'
-let g:syntastic_warning_symbol = '!'
-let g:syntastic_style_error_symbol = '>>'
-let g:syntastic_style_warning_symbol = '>'
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_enable_signs = 1
-"let g:syntastic_quiet_messages = {'level': 'warnings'}
-let g:syntastic_python_flake8_args='--ignore=F403'
-let g:syntastic_python_flake8_args = "--max-line-length=120"
-let g:syntastic_python_checkers = ['flake8', 'pylint']
-let g:syntastic_c_checkers = ['checkpatch', 'gcc', 'make']
-"let g:syntastic_disabled_filetypes = ['html']
-"let g:syntastic_json_checker = "jsonlint"
-"let g:syntastic_ruby_checkers = ['rubocop']
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_error_symbol = 'x'
+"let g:syntastic_warning_symbol = '!'
+"let g:syntastic_style_error_symbol = '>>'
+"let g:syntastic_style_warning_symbol = '>'
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_enable_signs = 1
+""let g:syntastic_quiet_messages = {'level': 'warnings'}
+"let g:syntastic_python_flake8_args='--ignore=F403'
+"let g:syntastic_python_flake8_args = "--max-line-length=120"
+"let g:syntastic_python_checkers = ['flake8', 'pylint']
+"let g:syntastic_c_checkers = ['checkpatch', 'gcc', 'make']
+""let g:syntastic_disabled_filetypes = ['html']
+""let g:syntastic_json_checker = "jsonlint"
+""let g:syntastic_ruby_checkers = ['rubocop']
+
+"""""""" ALE
+let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 1
+"let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '!'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 """""""" GO LINT
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
@@ -209,12 +222,3 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_detect_paste=1
 "let g:airline#extensions#tabline#fnamemod = ':t'
-" Workaround for leaving insert mode delay with statusline active
-if ! has('gui_running')
-  set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-  augroup END
-endif
