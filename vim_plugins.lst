@@ -1,0 +1,16 @@
+https://github.com/Valloric/YouCompleteMe.git
+git@github.com:elzr/vim-json.git
+https://github.com/bling/vim-airline
+https://github.com/davidhalter/jedi-vim.git
+https://github.com/w0rp/ale
+https://github.com/junegunn/fzf.vim
+https://github.com/rking/ag.vim
+https://github.com/vim-ruby/vim-ruby.git
+https://github.com/SirVer/ultisnips.git
+https://github.com/sjl/gundo.vim.git
+git://github.com/tpope/vim-fugitive.git
+https://github.com/fatih/vim-go.git
+https://github.com/hashivim/vim-terraform.git
+https://github.com/honza/vim-snippets.git
+https://github.com/scrooloose/nerdtree.git
+https://github.com/kien/ctrlp.vim.git
