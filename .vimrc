@@ -8,17 +8,20 @@ execute pathogen#helptags()
 
 "YouCompleteMe
 "ag.vim
+"ale
 "ctrlp.vim
-"gundo.vim nerdtree
-"OLD: syntastic
-"ALE - Asynchronous Lint Engine
+"fzf.vim
+"gundo.vim
+"jedi-vim
+"nerdtree
 "ultisnips
 "vim-airline
 "vim-fugitive
+"vim-go
 "vim-json
 "vim-ruby
 "vim-snippets
-"jedi-vim
+"vim-terraform
 
 """""""" COLOR SCHEME """"""""
 ""let g:solarized_termcolors=256
@@ -42,12 +45,12 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-"Heads up: slow scrolling
-"set cursorline
+"set cursorline "Heads up: slow scrolling
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
 set autoread " Autoload hidden buffers on change
+set autowrite " Autosave if make is called
 " j and k go by actual line on the screen and not the entire wrapped line
 nnoremap j gj
 nnoremap k gk
@@ -214,6 +217,9 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("b")': ['<cr>', '<2-LeftMouse>'],
 \}
 
+"""""""" FZF
+set rtp+=/usr/local/opt/fzf
+
 """""""" NERDTree
 
 """""""" AIRLINE
@@ -222,3 +228,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_detect_paste=1
 "let g:airline#extensions#tabline#fnamemod = ':t'
+
+"""""""" VIM-GO
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
