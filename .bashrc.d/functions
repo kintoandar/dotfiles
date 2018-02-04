@@ -94,5 +94,5 @@ function git-config-opensource {
 }
 
 function git-open {
-  open $(git remote -v | grep -v heroku | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#http://#' -e 's#(com|info):#\1/#' -e 's#.git$##') | head -n1
+  open $(git remote -v | grep -v heroku | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#http://#' -e 's#:#/#2' -e 's#.git$##') | head -n1
 }
