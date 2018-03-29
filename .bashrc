@@ -7,4 +7,4 @@ source_scripts(){
   done
 }
 
-source_scripts ~/.bashrc.d/{paths,env,colors,prompt,aliases,functions,ansible,aws,chef,docker,fzf,hashicorp,kubernetes,_*,completion}
+source_scripts ~/.bashrc.d/{paths,env,colors,prompt,aliases,functions,ansible,aws,chef,docker,hashicorp,kubernetes,_*,completion,fzf}
