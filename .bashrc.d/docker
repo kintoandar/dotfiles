@@ -9,9 +9,9 @@ alias dimg="docker images"
 alias dtree="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz images -t"
 alias dstart="docker start"
 alias dstop="docker stop"
-alias drun="docker run -i -t --rm"
 alias dlogs="docker logs"
 
-function dexec { docker exec -i -t $* /bin/sh; }
+function drun { docker run -i -t --rm $*; }
+function dexec { docker exec -i -t $*; }
 function dup { docker run -d -p 8080:8080 --privileged $*; }
 function dstop-all { for I in $(docker ps | awk '/Up/ {print $1}'); do docker stop $I; done; }
