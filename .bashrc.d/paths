@@ -3,4 +3,4 @@ $PATH:\
 /usr/local/sbin:\
 ~/.rvm/bin:\
 ~/bin:\
-~/Documents/myprojects/go/bin
+~/code/go/bin
