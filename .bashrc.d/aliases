@@ -13,6 +13,9 @@ alias routeosx='netstat -r'
 alias envactivate='source ./*/bin/activate'
 alias jk='jekyll serve --watch --verbose'
 alias curlng='/usr/local/Cellar/curl/7.46.0/bin/curl'
+alias atom='code'
+alias cat='bat --style plain --paging never --theme TwoDark'
+alias kdiff="kitty +kitten diff"
 
 if [ $UID -ne 0 ]; then
     alias dmesg='sudo dmesg'
