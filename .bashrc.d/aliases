@@ -14,8 +14,10 @@ alias envactivate='source ./*/bin/activate'
 alias jk='jekyll serve --watch --verbose'
 alias curlng='/usr/local/Cellar/curl/7.46.0/bin/curl'
 alias atom='code'
-alias cat='bat --style plain --paging never --theme TwoDark'
+alias cat='bat --style plain --paging never --theme TwoDark --wrap never'
 alias kdiff="kitty +kitten diff"
+alias icat="kitty +kitten icat --place 139x41@0x0"
+alias git-cleanup="git pull --prune && git b --merged | grep -v master | xargs git b -d"
 
 if [ $UID -ne 0 ]; then
     alias dmesg='sudo dmesg'
