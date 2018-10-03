@@ -23,11 +23,19 @@ function set_virtualenv () {
 }
 
 # detect rvm usage
+#function set_ruby () {
+#  if [[ $GEM_HOME =~ .*rvm.* ]] ; then
+#    RUBY_ENV="${ORANGE}[${GEM_HOME##*/}]${RSTCOLOR} "
+#  else
+#    RUBY_ENV=""
+#  fi
+#}
 function set_ruby () {
-  if [[ $GEM_HOME =~ .*rvm.* ]] ; then
-    RUBY_ENV="${ORANGE}[${GEM_HOME##*/}]${RSTCOLOR} "
-  else
+  RUBY_ENV="$(rbenv version|awk '{print $1}')"
+  if [[ ${RUBY_ENV} =~ .*system.* || -z ${RUBY_ENV} ]] ; then
     RUBY_ENV=""
+  else
+    RUBY_ENV="${ORANGE}[${RUBY_ENV}]${RSTCOLOR} "
   fi
 }
 
