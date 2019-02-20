@@ -1,7 +1,7 @@
 #export DOCKER_HOST=tcp://coreos01:2375
 export DOCKER_HOST=
 
-alias dins='docker inspect -f'
+alias dins="docker inspect"
 alias drm="docker rm"
 alias drmi="docker rmi"
 alias dps="docker ps -a"
