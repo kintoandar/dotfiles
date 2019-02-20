@@ -14,6 +14,7 @@ alias envactivate='source ./*/bin/activate'
 alias jk='jekyll serve --watch --verbose'
 alias curlng='/usr/local/Cellar/curl/7.46.0/bin/curl'
 alias atom='code'
+alias grammarly='open -a Grammarly'
 alias cat='bat --style plain --paging never --theme TwoDark --wrap never'
 alias kdiff="kitty +kitten diff"
 alias icat="kitty +kitten icat --place 139x41@0x0"
