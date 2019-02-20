@@ -19,19 +19,22 @@ export VAULT_ADDR=http://127.0.0.1:8200
 export VAULT_TOKEN=
 
 # java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # python
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.13/bin/python
-export VIRTUALENV_PYTHON=/usr/local/Cellar/python/2.7.13/bin/python
+export VIRTUALENVWRAPPER_PYTHON='/usr/local/Cellar/python@2/2.7.15_3/bin/python'
+export VIRTUALENV_PYTHON='/usr/local/Cellar/python@2/2.7.15_3/bin/python'
 source /usr/local/bin/virtualenvwrapper.sh
 
 # go
-export GOPATH=$HOME/Documents/myprojects/go
+export GOPATH=$HOME/code/go
 export GOBIN=$GOPATH/bin
 
 # gpg
 export GPG_TTY="$(tty)"
 
 # rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+eval "$(rbenv init -)"
+
