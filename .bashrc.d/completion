@@ -3,10 +3,12 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-eval "$(direnv hook bash)"
-
 # rvm
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
 # kubernetes
 source <(kubectl completion bash)
+
+# direnv
+eval "$(direnv hook bash)"
+
