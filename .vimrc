@@ -45,7 +45,7 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-"set cursorline "Heads up: slow scrolling
+set cursorline "Heads up: slow scrolling
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
@@ -117,10 +117,13 @@ nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 nnoremap <leader>s :w !sudo tee %<CR>
 
 " buffer navigation
-map gl :bn<cr>
-map gh :bp<cr>
-map gd :bd<CR>
-map gb :ls<CR>
+"map gl :bn<cr>
+"map gh :bp<cr>
+"map gd :bd<CR>
+"map gb :ls<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <C-X> :bdelete<CR>
 
 " hardmode
 "noremap <Up> <NOP>
@@ -160,7 +163,7 @@ let g:ycm_register_as_syntastic_checker=0
 let g:ycm_auto_trigger=1
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+"let g:ycm_path_to_python_interpreter = '/usr/local/bin/python2.7'
 
 """""""" deoplete
 "let g:deoplete#enable_at_startup = 1
