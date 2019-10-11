@@ -23,8 +23,8 @@ export VAULT_TOKEN=
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # python
-export VIRTUALENVWRAPPER_PYTHON='/usr/local/Cellar/python@2/2.7.15_3/bin/python'
-export VIRTUALENV_PYTHON='/usr/local/Cellar/python@2/2.7.15_3/bin/python'
+export VIRTUALENVWRAPPER_PYTHON='/usr/local/opt/python@2/bin/python'
+export VIRTUALENV_PYTHON='/usr/local/opt/python@2/bin/python'
 source /usr/local/bin/virtualenvwrapper.sh
 
 # go
