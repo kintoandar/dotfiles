@@ -16,3 +16,4 @@ function dexec { docker exec -i -t $*; }
 function dup { docker run -d -p 8080:8080 --privileged $*; }
 function dstop-all { for I in $(docker ps | awk '/Up/ {print $1}'); do docker stop $I; done; }
 function drm-all { for I in $(docker ps -a | awk '/Exited/ {print $1}'); do docker rm $I; done; }
+function drmi-all { for I in $(docker images | awk '!/IMAGE/{print $3}'); do docker rmi $I --force; done; }

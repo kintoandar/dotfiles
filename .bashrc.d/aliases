@@ -11,7 +11,7 @@ alias wget='wget -c'
 alias netstatosx='sudo lsof -i -n -P | grep LISTEN'
 alias routeosx='netstat -r'
 alias envactivate='source ./*/bin/activate'
-alias jk='jekyll serve --watch --verbose'
+alias jk='bundle exec jekyll serve --watch --verbose'
 alias curlng='/usr/local/Cellar/curl/7.46.0/bin/curl'
 alias atom='code'
 alias grammarly='open -a Grammarly'
@@ -19,6 +19,9 @@ alias cat='bat --style plain --paging never --theme TwoDark --wrap never'
 alias kdiff="kitty +kitten diff"
 alias icat="kitty +kitten icat --place 139x41@0x0"
 alias git-cleanup="git pull --prune && git b --merged | grep -v master | xargs git b -d"
+
+alias stats='Rscript -e "summary(as.numeric(readLines(\"stdin\")))"'
+alias boxplot='Rscript -e "boxplot(as.numeric(readLines(\"stdin\")))"'
 
 if [ $UID -ne 0 ]; then
     alias dmesg='sudo dmesg'
