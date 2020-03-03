@@ -23,9 +23,7 @@ export VAULT_TOKEN=
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # python
-export VIRTUALENVWRAPPER_PYTHON='/usr/local/opt/python@2/bin/python'
-export VIRTUALENV_PYTHON='/usr/local/opt/python@2/bin/python'
-source /usr/local/bin/virtualenvwrapper.sh
+eval "$(pyenv init -)"
 
 # go
 export GOPATH=$HOME/code/go
