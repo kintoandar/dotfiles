@@ -1,6 +1,10 @@
 PATH=/usr/local/opt/openssl/bin:\
+/usr/local/opt/python/libexec/bin:\
+/usr/local/opt/make/libexec/gnubin:\
 $PATH:\
 /usr/local/sbin:\
 ~/.rvm/bin:\
+/Users/fluke/.rbenv/shims/gem:\
 ~/bin:\
-~/code/go/bin
+~/code/go/bin:\
+~/.cargo/bin
