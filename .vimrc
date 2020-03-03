@@ -22,6 +22,7 @@ execute pathogen#helptags()
 "vim-ruby
 "vim-snippets
 "vim-terraform
+"undotree
 
 """""""" COLOR SCHEME """"""""
 ""let g:solarized_termcolors=256
@@ -45,7 +46,7 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-set cursorline "Heads up: slow scrolling
+"set cursorline "Heads up: slow scrolling
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
@@ -105,16 +106,19 @@ noremap <F7> :%!xxd<CR>
 noremap <F8> :%!xxd -r<CR>
 noremap <F9> :w !sudo tee %<CR>
 
-nnoremap <leader>u :GundoToggle<CR>
+" Leader key combos
+nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>p :set paste!<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>n :set relativenumber! number!<CR>
-nnoremap <leader>g :GitGutterSignsToggle<CR>
+nnoremap <leader>g :G<CR>
 nnoremap <leader>c :NeoComplCacheEnable<CR>
 nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
 nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 nnoremap <leader>s :w !sudo tee %<CR>
+"Back to original use <C-o>
+nnoremap <leader>d :only<bar>vsplit<CR>gd
 
 " buffer navigation
 "map gl :bn<cr>
@@ -125,7 +129,7 @@ nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 nnoremap <C-X> :bdelete<CR>
 
-" hardmode
+" Hardmode
 "noremap <Up> <NOP>
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
@@ -206,9 +210,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
-"""""""" VIM-GUTTER
-let g:gitgutter_max_signs = 500
-
 """""""" CTRLP
 let g:ctrlp_working_path_mode='a'
 " Setup some default ignores
@@ -237,3 +238,9 @@ let g:airline_detect_paste=1
 """""""" VIM-GO
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+"""""""" undotree
+if has("persistent_undo")
+    set undodir=$HOME."/.cache/undotree"
+    set undofile
+endif
