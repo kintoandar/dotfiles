@@ -25,11 +25,20 @@ execute pathogen#helptags()
 "undotree
 
 """""""" COLOR SCHEME """"""""
-""let g:solarized_termcolors=256
-colorscheme solarized
-set t_Co=256
+if (empty($TMUX))
+  if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+set background=dark " for the dark version
+" set background=light " for the light version
+colorscheme one
+
 syntax enable
-set background=dark
 
 """""""" GLOBAL """"""""
 set nocompatible          " old vi compatibility
@@ -46,7 +55,8 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-"set cursorline "Heads up: slow scrolling
+" enable cursorline when in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
@@ -153,6 +163,9 @@ au FileType sh setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2 colorcolu
 """""""" C
 au Filetype c setlocal shiftwidth=8 tabstop=8 noexpandtab colorcolumn=80
 
+"""""""" Go
+au Filetype go setlocal shiftwidth=2 tabstop=2 noexpandtab colorcolumn=80
+
 """""""" YAML
 "au BufNewFile,BufRead *.yaml,*.yml setf yaml
 
@@ -224,7 +237,7 @@ let g:ctrlp_prompt_mappings = {
 \}
 
 """""""" FZF
-set rtp+=/usr/local/opt/fzf
+"set rtp+=/usr/local/opt/fzf
 
 """""""" NERDTree
 
