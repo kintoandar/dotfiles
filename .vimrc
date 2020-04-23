@@ -2,27 +2,26 @@
 " blog.kintoandar.com
 """"""""""""""""""""""
 
+""""""" PLUGINS """"""""
+"https://github.com/Valloric/YouCompleteMe.git
+"https://github.com/rakr/vim-one.git
+"git@github.com:elzr/vim-json.git
+"https://github.com/bling/vim-airline
+"https://github.com/w0rp/ale
+"https://github.com/rking/ag.vim
+"https://github.com/SirVer/ultisnips.git
+"https://github.com/Raimondi/delimitMate.git
+"git://github.com/tpope/vim-fugitive.git
+"https://github.com/fatih/vim-go.git
+"https://github.com/hashivim/vim-terraform.git
+"https://github.com/honza/vim-snippets.git
+"https://github.com/scrooloose/nerdtree.git
+"https://github.com/kien/ctrlp.vim.git
+"https://github.com/mbbill/undotree
+
 """"""" PATHOGEN """"""""
 execute pathogen#infect()
 execute pathogen#helptags()
-
-"YouCompleteMe
-"ag.vim
-"ale
-"ctrlp.vim
-"fzf.vim
-"gundo.vim
-"jedi-vim
-"nerdtree
-"ultisnips
-"vim-airline
-"vim-fugitive
-"vim-go
-"vim-json
-"vim-ruby
-"vim-snippets
-"vim-terraform
-"undotree
 
 """""""" COLOR SCHEME """"""""
 if (empty($TMUX))
@@ -55,8 +54,12 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set nrformats-=octal
-" enable cursorline when in insert mode
+
+" clear highlight and enable cursorline when in insert mode
+hi clear CursorLine
+hi CursorLine term=underline cterm=underline gui=underline
 autocmd InsertEnter,InsertLeave * set cul!
+
 set shortmess+=I " Disable welcome message
 set encoding=utf-8 " Set default encoding
 set hidden " Hide buffers on switching instead of abandoning them
