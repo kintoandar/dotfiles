@@ -104,10 +104,6 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-let mapleader = ","
-" leader+space will clear it.
-nnoremap <leader><space> :noh<cr>
-
 " Meh, using leader key is much faster!
 noremap <F2> :set fileformat=unix<CR>
 noremap <F3> :set list!<CR>
@@ -120,6 +116,8 @@ noremap <F8> :%!xxd -r<CR>
 noremap <F9> :w !sudo tee %<CR>
 
 " Leader key combos
+let mapleader = ","
+nnoremap <leader><space> :noh<cr>
 nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>p :set paste!<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
@@ -194,7 +192,7 @@ let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-"""""""" SYNTASTIC
+"""""""" SYNTASTIC (replaced by ALE)
 "let g:syntastic_check_on_open = 0
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_error_symbol = 'x'
@@ -221,10 +219,8 @@ let g:ale_python_flake8_args="--ignore=E501"
 let g:ale_python_pylint_options="--disable=C0301"
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-"""""""" GO LINT
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+"let g:ale_linters = {'go': ['golangci-lint', 'golint', 'go vet']}
+let g:ale_linters = {'go': ['golangci-lint']}
 
 """""""" CTRLP
 let g:ctrlp_working_path_mode='a'
@@ -254,6 +250,7 @@ let g:airline_detect_paste=1
 """""""" VIM-GO
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+let g:go_fmt_command = "goimports"
 
 """""""" undotree
 if has("persistent_undo")
