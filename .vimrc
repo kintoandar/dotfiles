@@ -251,9 +251,3 @@ let g:airline_detect_paste=1
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 let g:go_fmt_command = "goimports"
-
-"""""""" undotree
-if has("persistent_undo")
-    set undodir=$HOME."/.cache/undotree"
-    set undofile
-endif
