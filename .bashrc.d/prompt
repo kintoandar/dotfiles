@@ -30,19 +30,20 @@ function set_virtualenv () {
 #    RUBY_ENV=""
 #  fi
 #}
-function set_ruby () {
-  RUBY_ENV="$(rbenv version|awk '{print $1}')"
-  if [[ ${RUBY_ENV} =~ .*system.* || -z ${RUBY_ENV} ]] ; then
-    RUBY_ENV=""
-  else
-    RUBY_ENV="${ORANGE}[${RUBY_ENV}]${RSTCOLOR} "
-  fi
-}
+
+#function set_ruby () {
+#  RUBY_ENV="$(rbenv version|awk '{print $1}')"
+#  if [[ ${RUBY_ENV} =~ .*system.* || -z ${RUBY_ENV} ]] ; then
+#    RUBY_ENV=""
+#  else
+#    RUBY_ENV="${ORANGE}[${RUBY_ENV}]${RSTCOLOR} "
+#  fi
+#}
 
 # detect AWS environment
 function set_aws () {
   if [[ "x$AWS_ENV" != "x" ]] ; then
-    AWS_ENV_="${YELLOW}[${AWS_ENV##*/}]${RSTCOLOR} "
+    AWS_ENV_="${YELLOW}[${AWS_ENV}${AWS_ACC}][${AWS_REGION}]${RSTCOLOR} "
   else
     AWS_ENV_=""
   fi
@@ -76,7 +77,7 @@ function set_bash_prompt () {
   set_virtualenv
 
   # set rvm usage
-  set_ruby
+  # set_ruby
 
   # set aws environment
   set_aws

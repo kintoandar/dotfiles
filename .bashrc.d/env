@@ -20,10 +20,13 @@ export VAULT_TOKEN=
 
 # java
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/
-if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+#if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # python
 eval "$(pyenv init -)"
+
+# rvm
+#eval "$(rbenv init -)"
 
 # go
 export GOPATH=$HOME/code/go
@@ -32,7 +35,5 @@ export GOBIN=$GOPATH/bin
 # gpg
 export GPG_TTY="$(tty)"
 
-# rvm
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-eval "$(rbenv init -)"
-
+# disable ZSH stuff
+export BASH_SILENCE_DEPRECATION_WARNING=1

@@ -18,9 +18,9 @@ function macgenxen(){
 }
 
 # cdargs
-function cdb () {
-  cdargs "$1" && cd "`cat "$HOME/.cdargsresult"`" ;
-}
+#function cdb () {
+#  cdargs "$1" && cd "`cat "$HOME/.cdargsresult"`" ;
+#}
 
 # git
 function gitpullall() {

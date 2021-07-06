@@ -5,6 +5,7 @@ $PATH:\
 /usr/local/sbin:\
 ~/.rvm/bin:\
 /Users/fluke/.rbenv/shims/gem:\
+/Users/fluke/.gem/ruby/2.7.0/bin:\
 ~/bin:\
 ~/code/go/bin:\
 ~/.cargo/bin

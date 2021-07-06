@@ -2,24 +2,27 @@
 export DATASTORE_TYPE=kubernetes
 export KUBECONFIG=~/.kube/config
 
-function kube_ctx {
-  export KUBE_CTX="$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')"
-}
+alias k="kubectl"
+complete -F __start_kubectl k
 
-function ku {
-  if [[ "x$KUBE_CTX" == "x" ]] ; then
-     kube_ctx
-     read -p "[${KUBE_CTX}] is currently enabled, press any key to proceed..."
-     kubectl "$@"
-   elif [[ "$KUBE_CTX" != "$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')" ]] ; then
-     kube_ctx
-     read -p "[${KUBE_CTX}] is currently enabled, press any key to proceed..."
-     kubectl "$@"
-   else
-     kubectl "$@"
-   fi
-}
+#function kube_ctx {
+#  export KUBE_CTX="$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')"
+#}
+#
+#function ku {
+#  if [[ "x$KUBE_CTX" == "x" ]] ; then
+#     kube_ctx
+#     read -p "[${KUBE_CTX}] is currently enabled, press any key to proceed..."
+#     kubectl "$@"
+#   elif [[ "$KUBE_CTX" != "$(awk '/current-context/ {print $2}' ~/.kube/config|tr -d '\n')" ]] ; then
+#     kube_ctx
+#     read -p "[${KUBE_CTX}] is currently enabled, press any key to proceed..."
+#     kubectl "$@"
+#   else
+#     kubectl "$@"
+#   fi
+#}
 
 function kube_nodes {
-  ku get nodes -o json | jq -r '.items[] | {"role": .metadata.labels."kubernetes.io/role", "group": .metadata.labels.group, "network": .status.addresses[] | select(.type=="InternalIP")} | (.network.address +" # "+ .role +" "+ .group)' | column -t | sort -k3
+  kubectl get nodes -o json | jq -r '.items[] | {"role": .metadata.labels."kubernetes.io/role", "group": .metadata.labels.group, "network": .status.addresses[] | select(.type=="InternalIP")} | (.network.address +" # "+ .role +" "+ .group)' | column -t | sort -k3
 }
