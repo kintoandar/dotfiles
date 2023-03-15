@@ -41,13 +41,13 @@ function set_virtualenv () {
 #}
 
 # detect AWS environment
-function set_aws () {
-  if [[ "x$AWS_ENV" != "x" ]] ; then
-    AWS_ENV_="${YELLOW}[${AWS_ENV}${AWS_ACC}][${AWS_REGION}]${RSTCOLOR} "
-  else
-    AWS_ENV_=""
-  fi
-}
+#function set_aws () {
+#  if [[ "x$AWS_ENV" != "x" ]] ; then
+#    AWS_ENV_="${YELLOW}[${AWS_ENV}${AWS_ACC}][${AWS_REGION}]${RSTCOLOR} "
+#  else
+#    AWS_ENV_=""
+#  fi
+#}
 
 # detect Jira login
 function set_jira () {
@@ -80,10 +80,10 @@ function set_bash_prompt () {
   # set_ruby
 
   # set aws environment
-  set_aws
+  #set_aws
 
   # set jira login
-  set_jira
+  #set_jira
 
   # set kube context
   set_kube

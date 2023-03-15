@@ -1,6 +1,8 @@
 PATH=/usr/local/opt/openssl/bin:\
 /usr/local/opt/python/libexec/bin:\
 /usr/local/opt/make/libexec/gnubin:\
+/opt/homebrew/bin:\
+/opt/homebrew/sbin:\
 $PATH:\
 /usr/local/sbin:\
 ~/.rvm/bin:\

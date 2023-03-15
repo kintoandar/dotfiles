@@ -17,10 +17,11 @@ function macgenxen(){
   $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256));
 }
 
-# cdargs
-#function cdb () {
-#  cdargs "$1" && cd "`cat "$HOME/.cdargsresult"`" ;
-#}
+cdb ()
+{
+    local dir;
+    _cdargs_get_dir "$1" && cd "$dir" && echo `pwd`
+}
 
 # git
 function gitpullall() {
