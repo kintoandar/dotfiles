@@ -1,0 +1,116 @@
+# helpful functions
+function passgen() {
+  if [ $# -ne 1 ]; then
+    echo "ARGS: <length>"
+  else
+    pwgen -s $1 1 | tr -d '\n' | pbcopy && pbpaste && echo -e "\n==> Sent to clipboard"
+  fi
+}
+
+function macgenxen(){
+  printf '00:16:3E:%02X:%02X:%02X\n' \
+  $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256));
+}
+
+source /opt/homebrew/etc/bash_completion.d/cdargs-bash.sh
+cdb ()
+{
+    local dir;
+    _cdargs_get_dir "$1" && cd "$dir" && echo `pwd`
+}
+
+# git
+function gitpullall() {
+  CWD=`pwd`; find $PWD -type d -name .git -print0 |\
+  xargs -0 -I{} dirname {} | xargs -I{} sh -c \
+  'cd {}; echo "GIT pulling {}"; git pull; git submodule update --recursive'
+}
+function gitinfoall() {
+  CWD=`pwd`; find $PWD -type d -name .git -print0 |\
+  xargs -0 -I{} dirname {} | xargs -I{} sh -c \
+  'cd {}; git config --get remote.origin.url'
+}
+
+function tcp-get {
+  if [ $# -ne 2 ]; then
+    echo "ARGS: <host> <port>"
+  else
+    # zsh has no /dev/tcp -- that is a bash builtin. Use the zsh/net/tcp module.
+    zmodload zsh/net/tcp || return 1
+    ztcp "$1" "$2" || return 1
+    local fd=$REPLY
+    print -u $fd -- "GET / HTTP/1.1\r\nHost: $1\r\nConnection: close\r\n"
+    cat <&$fd
+    ztcp -c $fd
+  fi
+}
+
+ssh-no-key (){
+  ssh -v -o PreferredAuthentications=password -o PubkeyAuthentication=no "$@"
+}
+
+vimremote(){
+  if [ $# -ne 3 ]; then
+    echo "ARGS: <user> <host>[:port] <full_path_to_file>"
+  else
+    vim scp://$1@$2//$3
+  fi
+}
+
+
+# PKI
+function jksprint { keytool -v -list -keystore $1; }
+function pemprint { openssl x509 -in $1 -noout -issuer -subject -dates -fingerprint -serial; }
+function pemprintfull { openssl x509 -in $1 -text -noout; }
+function pemget { echo | openssl s_client -showcerts -connect $1;}
+function pemgetsni { echo | openssl s_client -showcerts -connect $1 -servername ${1%:443};}
+function pemgetsplit { echo | openssl s_client -showcerts -connect $1 2> /dev/null | awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++} inc {print > ("level" c ".crt")} /---END CERTIFICATE-----/{inc=0}'; }
+function pemsplit { cat $1 | awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++} inc {print > ("level" c ".crt")} /---END CERTIFICATE-----/{inc=0}'; }
+function pemcachain { openssl verify -CAfile $1 $2; }
+function pemmodpriv { openssl rsa -noout -modulus -in $1 | md5; }
+function pemmodpub { openssl x509 -noout -modulus -in $1 | md5; }
+function pemmodreq { openssl req -noout -modulus -in $1 | md5; }
+function crlpemprint { openssl crl -inform PEM -in $1 -text -noout; }
+function crlderprint { openssl crl -inform DER -in $1 -text -noout; }
+function pemkeyremove { openssl rsa -in $1 -out $2; }
+function p12topem { openssl pkcs12 -in $1 -out $2 -clcerts; }
+function pemtop12 { openssl pkcs12 -export -inkey $1 -in $1 -out $2 ; }
+function pemserver { echo '0:4433' ; openssl s_server -cert $1 -key $2 -www; }
+function pemgetprint { echo | openssl s_client -showcerts -connect $1 | openssl x509 -in /dev/stdin -text -noout; }
+
+# opensource git config
+function git-config-opensource {
+  git config credential.helper store
+  git config user.name "Joel Bastos"
+  git config user.email "kintoandar@gmail.com"
+  git config commit.gpgsign true
+  git config --global gitreview.username "kintoandar"
+}
+
+# AI stuff
+claude-lm() {
+    # subshell: without it these exports leak into the calling shell and
+    # every later `claude` in this terminal keeps talking to ollama.
+    (
+    export ANTHROPIC_BASE_URL=http://localhost:11434
+    export ANTHROPIC_AUTH_TOKEN=ollama
+    export CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY="2"
+    export CLAUDE_CODE_NO_FLICKER="0"
+    export ANTHROPIC_MODEL="gemma4:e2b-it-q4_K_M"
+    export CLAUDE_CODE_AUTO_COMPACT_WINDOW="48000"
+    export CLAUDE_AUTOCOMPACT_PCT_OVERRIDE="90"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="google/gemma4:e2b-it-q4_K_M"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="google/gemma4:e2b-it-q4_K_M"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="google/gemma4:e2b-it-q4_K_M"
+    export CLAUDE_CODE_SUBAGENT_MODEL="google/gemma4:e2b-it-q4_K_M"
+    export API_TIMEOUT_MS="30000000"
+    export BASH_DEFAULT_TIMEOUT_MS="2400000"
+    export BASH_MAX_TIMEOUT_MS="2500000"
+    export CLAUDE_CODE_MAX_OUTPUT_TOKENS="8000"
+    export CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS="8000"
+    export CLAUDE_CODE_ATTRIBUTION_HEADER="0"
+    export CLAUDE_CODE_DISABLE_1M_CONTEXT="1"
+    export CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING="1"
+    claude "$@"
+    )
+}

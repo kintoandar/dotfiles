@@ -1,0 +1,51 @@
+# Everything that must run after tools has defined its widgets.
+
+# -- Key bindings
+# Force the emacs keymap. zsh would otherwise pick viins, because $EDITOR
+# matches *vi* -- this, not `bindkey -v`, is why vi-mode kept coming back.
+bindkey -e
+
+# ctrl+left / ctrl+right in Ghostty send ^[b / ^[f (see ghostty.config).
+# These restate emacs defaults, deliberately: they survive a plugin that
+# rebinds them later, and they document the intent.
+# emacs-forward-word, not forward-word: the latter moves to the *beginning of
+# the next* word, the former to the *end of the current* one -- which is what
+# readline does in every other program on this machine.
+bindkey '^[b' backward-word
+bindkey '^[f' emacs-forward-word
+
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
+# ^X^E opens the current line in $EDITOR -- nvim, with NVIM_APPNAME=lazyvim
+# (see env). Unlike bash's ^X^E this does not run the command on save: the
+# edited text comes back to the prompt and you press Enter yourself.
+# Must precede zsh-syntax-highlighting, which wraps every widget it finds.
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+# Tab is fzf's fuzzy completion.
+#
+# The -M emacs is load-bearing, and the reason this was broken for a while:
+# fzf's setup ends with a bare `bindkey '^I' fzf-completion`, and a bare
+# bindkey lands in whatever keymap is current -- viins, because zsh picks the
+# default keymap from $EDITOR and that matches *vi* (see env). Drop the -M
+# emacs and fzf's Tab becomes reachable only in vi mode, while this shell
+# silently falls back to zsh's expand-or-complete.
+#
+# ROLLBACK: for zsh's own completion instead, swap the line below for
+#   bindkey -M emacs '^I' expand-or-complete
+bindkey -M emacs '^I' fzf-completion
+
+# Do NOT bind ^R here. fzf owns it and binds it with -M emacs explicitly, so a
+# manual bindkey would silently shadow fzf-history-widget.
+# ^T is not in that list: Ghostty binds it to new_tab (see ghostty.config), so
+# the key never reaches zsh and fzf-file-widget is unreachable by design.
+
+# -- Syntax highlighting
+# Must come after every widget it needs to wrap. Upstream README: source last.
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# -- Prompt
+eval "$(starship init zsh)"
