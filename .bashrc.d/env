@@ -23,7 +23,9 @@ export VAULT_TOKEN=
 #if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # python
-eval "$(pyenv init -)"
+# Guarded: zsh moved to mise 2026-09-05 and pyenv is scheduled for removal.
+# Without the guard every bash shell errors once ~/.pyenv is gone.
+if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 # rvm
 eval "$(rbenv init -)"

@@ -1,0 +1,65 @@
+# Runs before anything defines a zle widget or binds a key.
+
+# -- Homebrew
+# Must come first: everything below resolves through $HOMEBREW_PREFIX,
+# which brew shellenv exports.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# -- Path
+# mise prepends its own shim/tool paths from `mise activate` in tools -- not
+# set by hand here.
+export PATH="$HOME/bin:$HOME/code/go/bin:$PATH"
+
+# -- Locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# -- Editor
+# NOTE: zsh selects its keymap from $EDITOR -- anything matching *vi* (both
+# `vim` and `nvim`) picks viins. interactive forces emacs explicitly.
+# NVIM_APPNAME is exported rather than scoped to the alias so that $EDITOR
+# invocations from other programs get the same config as an interactive nvim.
+export NVIM_APPNAME='lazyvim'
+export EDITOR='nvim'
+
+# -- fzf
+# rg is installed, fd is not, and ag is long gone.
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+
+# -- go
+export GOPATH="$HOME/code/go"
+export GOBIN="$GOPATH/bin"
+
+# -- gpg
+export GPG_TTY="$(tty)"
+
+# -- ollama
+export OLLAMA_KEEP_ALIVE=-1
+export OLLAMA_MAX_LOADED_MODELS=1
+export OLLAMA_METAL=1
+export OLLAMA_NUM_GPU=999
+
+# -- History
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+
+setopt SHARE_HISTORY          # share history live across open shells
+setopt HIST_IGNORE_ALL_DUPS   # keep only the most recent copy of a command
+setopt HIST_IGNORE_SPACE      # leading space = don't record
+setopt HIST_REDUCE_BLANKS
+setopt EXTENDED_HISTORY       # record timestamps
+
+# -- Navigation
+setopt AUTO_CD                # type a directory name to cd into it
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+
+# -- Completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'   # case-insensitive
+zstyle ':completion:*' menu select                        # arrow-key menu
+
+# cdargs ships a bash completion script, sourced by functions. Without
+# bashcompinit its `complete` call errors out on every startup.
+autoload -Uz bashcompinit && bashcompinit
