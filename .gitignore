@@ -48,3 +48,4 @@ rpm-build
 # Sublime stuff...
 *.sublime-project
 *.sublime-workspace
+CLAUDE.md

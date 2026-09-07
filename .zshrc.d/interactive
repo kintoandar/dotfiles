@@ -38,6 +38,9 @@ bindkey '^X^E' edit-command-line
 #   bindkey -M emacs '^I' expand-or-complete
 bindkey -M emacs '^I' fzf-completion
 
+# File completion
+bindkey -M emacs '^F' fzf-file-widget
+
 # Do NOT bind ^R here. fzf owns it and binds it with -M emacs explicitly, so a
 # manual bindkey would silently shadow fzf-history-widget.
 # ^T is not in that list: Ghostty binds it to new_tab (see ghostty.config), so
