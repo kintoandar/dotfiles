@@ -17,18 +17,15 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 DRY_RUN=false
 case "${1:-}" in
-  --dry-run|-n) DRY_RUN=true ;;
-  "")           ;;
-  *)            echo "usage: ${0##*/} [--dry-run]" >&2; exit 64 ;;
+--dry-run | -n) DRY_RUN=true ;;
+"") ;;
+*)
+  echo "usage: ${0##*/} [--dry-run]" >&2
+  exit 64
+  ;;
 esac
 
 # source (relative to repo) : destination (relative to $HOME)
-#
-# .gitconfig and .gitignore come from _secrets, NOT from the repo root. The
-# root copies are this repo's own git plumbing -- the `_*` rule in .gitignore
-# is what hides _secrets -- while the live ones carry the identity and are
-# unpublished. _secrets is absent on a fresh clone; the missing-source branch
-# below reports that instead of failing.
 LINKS=(
   ".bash_profile:.bash_profile"
   ".bashrc:.bashrc"
@@ -37,11 +34,6 @@ LINKS=(
   ".zshrc.d:.zshrc.d"
   "starship.toml:.config/starship.toml"
   "ghostty.config:.config/ghostty/config"
-  "_secrets/.gitconfig:.gitconfig"
-  "_secrets/.gitignore:.gitignore"
-  "_secrets/.git-corporate:.git-corporate"
-  "_secrets/.git-credentials:.git-credentials"
-  "_secrets/.git-personal:.git-personal"
 )
 
 ok=0 linked=0 conflicts=0 missing=0
@@ -97,5 +89,5 @@ printf '\n%d ok, %d linked, %d conflict(s), %d missing source(s)\n' \
   "$ok" "$linked" "$conflicts" "$missing"
 
 # Non-zero when something was in the way, so a caller can tell "all set" from
-# "needs a look". A missing _secrets is not a failure -- a fresh clone has none.
+# "needs a look".
 [ "$conflicts" -eq 0 ]
