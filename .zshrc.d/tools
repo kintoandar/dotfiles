@@ -7,6 +7,11 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 eval "$(zoxide init zsh)"     # z <partial-dir-name> to jump
 source <(fzf --zsh)           # Ctrl-R history, Ctrl-T files
 
+# Provide preview window
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --preview-window right:60%"
+
 # mise, replacing pyenv (2026-09-05). `activate` puts the shims dir on PATH and
 # installs a precmd hook that, on every cd, prepends the active install bin and
 # applies mise.toml env like a project .venv. `--shims` drops that hook, not the
