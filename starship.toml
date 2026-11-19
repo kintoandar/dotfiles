@@ -1,10 +1,12 @@
 add_newline = false
-format = "$python$directory$git_branch$git_status$character"
+format = "$python$golang$directory$git_branch$git_status$character"
 command_timeout = 1000
 
 [directory]
 truncation_length = 0
 truncate_to_repo = false
+
+#https://www.nerdfonts.com/cheat-sheet
 
 [character]
 success_symbol = "[❯](bold green)"
@@ -12,4 +14,11 @@ error_symbol = "[❯](bold red)"
 vimcmd_symbol = "[❮](bold yellow)"
 
 [python]
-format = '[\(${symbol}${version}\)]($style) '
+symbol = "\uec39 "
+format = '[\[${symbol}${version}\]]($style) '
+style = "yellow"
+
+[golang]
+symbol = "\ue626 "
+format = '[\[${symbol}${version}\]]($style) '
+style = "yellow"

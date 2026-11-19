@@ -14,6 +14,9 @@ export PATH="$HOME/bin:$HOME/code/go/bin:$PATH"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# -- Certs
+export NODE_EXTRA_CA_CERTS="$HOME/.config/certs/company.pem"
+
 # -- Editor
 # NOTE: zsh selects its keymap from $EDITOR -- anything matching *vi* (both
 # `vim` and `nvim`) picks viins. interactive forces emacs explicitly.
