@@ -2,7 +2,7 @@
 # wrap them and the custom bindkeys have to come after them -- both live in
 # interactive.
 
-source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 eval "$(zoxide init zsh)"     # z <partial-dir-name> to jump
 source <(fzf --zsh)           # Ctrl-R history, Ctrl-T files
@@ -17,5 +17,5 @@ export FZF_CTRL_T_OPTS="
 # applies mise.toml env like a project .venv. `--shims` drops that hook, not the
 # shims -- it is not the always-on switch. This file is interactive-only, so
 # cron, a LaunchAgent or a GUI app would need the shims dir on PATH from
-# .zshenv. Nothing here runs python that way.
-eval "$(mise activate zsh)"
+# .zshenv. Nothing here runs python that way. Not installed on the servers.
+(( $+commands[mise] )) && eval "$(mise activate zsh)"

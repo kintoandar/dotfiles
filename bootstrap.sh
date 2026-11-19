@@ -9,7 +9,8 @@
 #
 # Scope is the set of configs actually deployed on this machine. The dormant
 # ones in the repo (.vimrc, .screenrc, .conkyrc, .muttrc, kitty.conf) are left
-# out deliberately -- they are kept for reference, not installed.
+# out deliberately -- they are kept for reference, not installed. The Linux
+# servers get a subset (zsh, starship, lazyvim) from cfgmgmt, not from here.
 
 set -euo pipefail
 
@@ -34,6 +35,7 @@ LINKS=(
   ".zshrc.d:.zshrc.d"
   "starship.toml:.config/starship.toml"
   "ghostty.config:.config/ghostty/config"
+  "lazyvim:.config/lazyvim"
 )
 
 ok=0 linked=0 conflicts=0 missing=0

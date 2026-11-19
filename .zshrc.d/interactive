@@ -48,7 +48,7 @@ bindkey -M emacs '^F' fzf-file-widget
 
 # -- Syntax highlighting
 # Must come after every widget it needs to wrap. Upstream README: source last.
-source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # -- Prompt
 eval "$(starship init zsh)"
