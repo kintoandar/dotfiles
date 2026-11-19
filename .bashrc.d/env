@@ -8,8 +8,9 @@ export HISTIGNORE="history:uptime"
 export HISTSIZE=50000
 shopt -s histappend
 
-# vim
-export EDITOR='vim'
+# nvim, with the LazyVim config at ~/.config/lazyvim (mirrors .zshrc.d/env)
+export NVIM_APPNAME='lazyvim'
+export EDITOR='nvim'
 
 # fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
