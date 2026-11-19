@@ -2,13 +2,20 @@
 
 # -- Homebrew
 # Must come first: everything below resolves through $HOMEBREW_PREFIX,
-# which brew shellenv exports.
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# which brew shellenv exports. macOS only; on the Linux servers the same
+# tools come from apt.
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Where zsh-autosuggestions and zsh-syntax-highlighting live: Homebrew's
+# share dir, or /usr/share from apt.
+ZSH_PLUGINS="${HOMEBREW_PREFIX:-/usr}/share"
 
 # -- Path
 # mise prepends its own shim/tool paths from `mise activate` in tools -- not
 # set by hand here.
-export PATH="$HOME/bin:$HOME/code/go/bin:$PATH"
+# ~/.local/bin: on the servers it holds bat and fd (Debian ships them as
+# batcat and fdfind).
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/code/go/bin:$PATH"
 
 # -- Locale
 export LANG="en_US.UTF-8"

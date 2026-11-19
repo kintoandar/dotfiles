@@ -1,7 +1,7 @@
 alias grep='grep --color=auto'
 alias ws='echo http://$(ifconfig | grep -E "en.:" -A 3 | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1):8000 | tee /dev/tty | pbcopy ; python -m http.server'
 alias jsonprint='jq'
-alias diff='difft'
+(( $+commands[difft] )) && alias diff='difft'
 alias wget='wget -c'
 alias netstatosx='sudo lsof -i -n -P | grep LISTEN'
 alias routeosx='netstat -r'

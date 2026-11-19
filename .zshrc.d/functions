@@ -12,7 +12,7 @@ function macgenxen(){
   $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256));
 }
 
-source /opt/homebrew/etc/bash_completion.d/cdargs-bash.sh
+[ -r /opt/homebrew/etc/bash_completion.d/cdargs-bash.sh ] && source /opt/homebrew/etc/bash_completion.d/cdargs-bash.sh
 cdb ()
 {
     local dir;
