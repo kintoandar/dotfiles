@@ -41,6 +41,10 @@ bindkey -M emacs '^I' fzf-completion
 # File completion
 bindkey -M emacs '^F' fzf-file-widget
 
+# ctrl+left ctrl+right
+bindkey -M emacs '^[[1;5C' emacs-forward-word
+bindkey -M emacs '^[[1;5D' emacs-backward-word
+
 # Do NOT bind ^R here. fzf owns it and binds it with -M emacs explicitly, so a
 # manual bindkey would silently shadow fzf-history-widget.
 # ^T is not in that list: Ghostty binds it to new_tab (see ghostty.config), so
